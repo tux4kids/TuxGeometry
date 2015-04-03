@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Tux Geometry</string>
+    <string name="action_settings">Settings</string>
+    <string name="matching_start_button">Shape Matching Game</string>
+    <string name="area_start_button">Area Game</string>
+    <string name="high_score_button">High Scores</string>
+    <string name="drag_drop">Click on the image to drag and drop</string>
+
+</resources>

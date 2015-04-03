@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/abc_control_padding_material"
+    android:paddingRight="@dimen/abc_control_padding_material"
+    android:paddingTop="@dimen/abc_control_padding_material"
+    android:paddingBottom="@dimen/abc_control_padding_material"
+    android:orientation="horizontal"
+    tools:context=".WelcomeActivity$PlaceholderFragment"
+    android:weightSum="1"
+    android:backgroundTint="#ffffaa11"
+    android:background="#ffff7d02">
+
+    <TextView android:text="@string/app_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/welcome_title"
+        android:elegantTextHeight="true"
+        android:textColor="#ff2bbeff"
+        android:textSize="64sp"
+        android:gravity="center" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/matching_start_button"
+        android:id="@+id/matching_button"
+        android:layout_below="@id/welcome_title"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/area_start_button"
+        android:id="@+id/area_button"
+        android:layout_below="@+id/matching_button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/high_score_button"
+        android:id="@+id/high_score_button"
+        android:layout_below="@+id/area_button"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
