@@ -3,8 +3,8 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/linear_layout"
     android:orientation="horizontal"
-    android:background="#ffff7d02"
-    android:backgroundTint="#ffffaa11">
+    android:background="#ff0aff96"
+    android:backgroundTint="#ff29efff">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -106,8 +106,8 @@
         android:id="@+id/answer3"
         android:layout_gravity="right|center_vertical"
         android:visibility="visible"
-        android:background="#ff2bbeff"
-        android:textColor="#ff2bbeff"
+        android:background="#fff35cff"
+        android:textColor="#fff35cff"
         android:gravity="center"
         android:layout_marginRight="10dp" />
 

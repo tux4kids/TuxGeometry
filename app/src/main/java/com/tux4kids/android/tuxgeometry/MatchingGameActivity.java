@@ -27,7 +27,7 @@ public class MatchingGameActivity extends Activity {
     private int numShapes = 9; //the number of shapes available for display
     private TextView answer1, answer2, answer3; //this is where the answers will be displayed
     private int matchCount; //counts how many correct matches the user has made this round
-    private int roundCount; //counts how many rounds the user has completed
+    private int roundCount = 0; //counts how many rounds the user has completed
 
 
     public void onCreate(final Bundle savedInstanceState){
@@ -38,6 +38,11 @@ public class MatchingGameActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.matching_game_view);
+
+        if(roundCount == 0) {
+            Toast intro = Toast.makeText(this, "Drag the names of the shapes to the boxes", Toast.LENGTH_LONG);
+            intro.show();
+        }
 
         //set up and draw three random shapes and TextViews
 
@@ -54,7 +59,11 @@ public class MatchingGameActivity extends Activity {
         //set the shape strings to random shape names and set the images for these shapes
         shape1 = randomShape(image1);
         shape2 = randomShape(image2);
+        while(shape1.equals(shape2))  //make sure it isn't a duplicate
+            shape2 = randomShape(image2);
         shape3 = randomShape(image3);
+        while(shape1.equals(shape3) || shape2.equals(shape3))  //make sure shape3 isn't a duplicate
+            shape3 = randomShape(image3);
 
         //set the answers textviews
         answer1.setText(shape1);
@@ -80,25 +89,6 @@ public class MatchingGameActivity extends Activity {
 
             tvArray[rand] = tvArray[i-1];
         }
-
-
-
-        //set up a class to deal with touch events
-//        final class ShapeTextTouchListener implements View.OnTouchListener{
-//
-//            @SuppressLint("NewApi")
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent){
-//                if (motionEvent.getAction()  == motionEvent.ACTION_DOWN){
-//                    ClipData data = ClipData.newPlainText("", "");
-//                    View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-//                    view.startDrag(data, shadowBuilder, view, 0);
-//                    return true;
-//                }
-//                else
-//                    return false;
-//            }
-//        }
 
 
 
