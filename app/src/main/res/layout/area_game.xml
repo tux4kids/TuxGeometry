@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#ff29efff">
 
     <ImageView
         android:layout_width="290dp"
@@ -13,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:id="@+id/height"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_gravity="left|center_vertical"
         android:hint="Height"
         android:layout_marginLeft="50dp" />
@@ -21,16 +23,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/width"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="50dp"
         android:hint="Width" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/area"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_gravity="center_horizontal|bottom"
-        android:hint="Area"
         android:layout_marginBottom="20dp" />
 
     <TextView

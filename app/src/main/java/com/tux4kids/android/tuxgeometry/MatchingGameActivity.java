@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -28,6 +29,7 @@ public class MatchingGameActivity extends Activity {
     private TextView answer1, answer2, answer3; //this is where the answers will be displayed
     private int matchCount; //counts how many correct matches the user has made this round
     private int roundCount = 0; //counts how many rounds the user has completed
+    private Date startDate, endDate; //when the game starts and ends
 
 
     public void onCreate(final Bundle savedInstanceState){
@@ -40,6 +42,7 @@ public class MatchingGameActivity extends Activity {
         setContentView(R.layout.matching_game_view);
 
         if(roundCount == 0) {
+            startDate = new Date();
             Toast intro = Toast.makeText(this, "Drag the names of the shapes to the boxes", Toast.LENGTH_LONG);
             intro.show();
         }
@@ -194,7 +197,13 @@ public class MatchingGameActivity extends Activity {
 
     public void winner(){
         Log.d(TAG, "The game is over!");
-        Toast t = Toast.makeText(this, "You win!", Toast.LENGTH_LONG);
+        endDate = new Date();
+        double finishTime = (endDate.getTime() - startDate.getTime())/1000;
+        String finish = new String();
+        finish += finishTime;
+        finish = "You win! It took you " + finish + " seconds";
+
+        Toast t = Toast.makeText(this, finish, Toast.LENGTH_LONG);
         t.show();
     }
 

@@ -7,10 +7,11 @@ import android.text.Html;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -20,20 +21,28 @@ import java.util.Random;
 public class AreaGameActivity extends Activity {
 
     private static final String TAG = "AreaGameActivity";
-    private TextView answer1, answer2, answer3, height, width;  //the possible answers
-    private EditText area;   //where to enter the answers
+    private TextView answer1, answer2, answer3, height, width, area;
     String shape;
     private int numShapes = 5;
+    private int roundCount = 0;
+    Date startDate, endDate;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(final Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rectangle_area);
+        setContentView(R.layout.area_game);
+
+        //run this the first round to give instructions
+        if(roundCount == 0) {
+            Toast intro = Toast.makeText(this, "Drag the correct answer to the area box", Toast.LENGTH_LONG);
+            intro.show();
+            startDate = new Date();
+        }
 
         //get all the views from the layout
         width = (TextView) findViewById(R.id.width);
         height = (TextView) findViewById(R.id.height);
-        area = (EditText) findViewById(R.id.area);
+        area = (TextView) findViewById(R.id.area);
         answer1 = (TextView) findViewById(R.id.answer1);
         answer2 = (TextView) findViewById(R.id.answer2);
         answer3 = (TextView) findViewById(R.id.answer3);
@@ -65,13 +74,13 @@ public class AreaGameActivity extends Activity {
             width.setText("Width: " + widthInt);
             height.setText("Height: " + heightInt);
 
-            area.setHint("Area = height * width");
+            area.setText("Area = height * width");
 
             areaAnswer = heightInt * widthInt;
 
             if(shape.equals("TRIANGLE")) {
                 areaAnswer *= .5;
-                area.setHint("Area = 1/2 * height * width");
+                area.setText("Area = 1/2 * height * width");
             }
 
 
@@ -83,7 +92,7 @@ public class AreaGameActivity extends Activity {
         if(shape.equals("CIRCLE")) {
             height.setVisibility(View.INVISIBLE);
             width.setText("Radius: " + widthInt);
-            area.setHint(Html.fromHtml("Area = pi * r<sup><small>2</small></sup>"));
+            area.setText(Html.fromHtml("Area = pi * r<sup><small>2</small></sup>"));
             areaAnswer = widthInt * widthInt * 3.14;
 
         }
@@ -136,8 +145,13 @@ public class AreaGameActivity extends Activity {
 
                             dropTarget.setText(rightTarget);
 
-
-
+                            //if the game isn't over then load another shape
+                            if(roundCount < 10) {
+                                roundCount++;
+                                onCreate(savedInstanceState);
+                            }
+                            else //the game is over
+                                winner();
                         }
 
 
@@ -187,5 +201,18 @@ public class AreaGameActivity extends Activity {
                 return null;
         }
 
+    }
+
+    //runs when the player has won the game
+    public void winner(){
+        Log.d(TAG, "The game is over!");
+        endDate = new Date();
+        double finishTime = (endDate.getTime() - startDate.getTime())/1000;
+        String finish = new String();
+        finish += finishTime;
+        finish = "You win! It took you " + finish + " seconds";
+
+        Toast t = Toast.makeText(this, finish, Toast.LENGTH_LONG);
+        t.show();
     }
 }
