@@ -8,5 +8,6 @@
     <string name="high_score_button">High Scores</string>
     <string name="drag_drop">Click on the image to drag and drop</string>
     <string name="preference_file_key">com.tux4kids.highScores.txt</string>
+    <string name="area_high_score_button">Area Game</string>
 
 </resources>

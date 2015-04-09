@@ -34,6 +34,16 @@
             android:screenOrientation="landscape">
 
         </activity>
+        <activity android:name=".AreaHighScores"
+            android:label="@string/area_start_button"
+            android:screenOrientation="landscape">
+
+        </activity>
+        <activity android:name=".MatchingHighScores"
+            android:label="@string/matching_start_button"
+            android:screenOrientation="landscape">
+
+        </activity>
     </application>
 
 </manifest>

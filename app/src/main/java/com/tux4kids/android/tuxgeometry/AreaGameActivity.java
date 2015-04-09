@@ -3,12 +3,16 @@ package com.tux4kids.android.tuxgeometry;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,10 +28,12 @@ public class AreaGameActivity extends Activity {
 
     private static final String TAG = "AreaGameActivity";
     private TextView answer1, answer2, answer3, height, width, area;
-    String shape;
-    private int numShapes = 5;
-    private int roundCount = 0;
-    Date startDate, endDate;
+    String shape; //the name of the shape that will be displayed
+    private int numShapes = 5; //the number of shapes that are possible to display
+    private int roundCount = 0; //counts the number of rounds the user has completed
+    Date startDate, endDate; //used to see how long it takes to complete the game
+    String userName;  //this will be set if the user gets a high score
+    int position; //the place the user achieves in the high score list
 
     @Override
     public void onCreate(final Bundle savedInstanceState){
@@ -99,15 +105,16 @@ public class AreaGameActivity extends Activity {
 
         TextView[] tvArray = {answer1, answer2, answer3};
 
+        //generate the wrong answers
         double wrongDouble1 = areaAnswer - 5 + mRandom.nextInt(10);
         while(wrongDouble1 == areaAnswer || wrongDouble1 < 1)
             wrongDouble1 = areaAnswer - 5 + mRandom.nextInt(10);
-
         double wrongDouble2 = areaAnswer - 5 + mRandom.nextInt(10);
         while(wrongDouble2 == areaAnswer || wrongDouble2 < 1 || wrongDouble2 == wrongDouble1)
             wrongDouble2 = areaAnswer - 5 + mRandom.nextInt(10);
 
 
+        //load the answers into random spots
         for(int i = 3; i >= 1; i--){
             int rand = mRandom.nextInt(i);
             if(i==1)
@@ -220,7 +227,8 @@ public class AreaGameActivity extends Activity {
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        int numScores = 0;
+        position = 11; //holds what place the user gets
+        int numScores = 0; //how many scores are in the high score list
         numScores = sharedPref.getInt("numAreaScores", numScores);
 
         //run this if there are no scores in the high score list
@@ -229,6 +237,7 @@ public class AreaGameActivity extends Activity {
             Log.d(TAG, "numScores == 0");
             numScores++;
             editor.putLong("areaHighScore1", (long) finishTime);
+            position = 1;
         }
         else{ //this runs if there is at least one high score in the list
 
@@ -259,6 +268,8 @@ public class AreaGameActivity extends Activity {
                     editor.putLong(oldHighScore, temp);
                     editor.putLong(highScore, (long) finishTime);
 
+                    position = i;
+
                     //the first time through the loop we need to note that a
                     //high score was added to the list
                     if(i == numScores) {
@@ -271,6 +282,7 @@ public class AreaGameActivity extends Activity {
                 else if (numScores < 10  && !addedHighScore) {
                     editor.putLong(oldHighScore, (long) finishTime);
                     numScores++;
+                    position = numScores;
                     addedHighScore = true;
                     break;
                 }
@@ -293,10 +305,45 @@ public class AreaGameActivity extends Activity {
         editor.putInt("numAreaScores", numScores);
         editor.commit();
 
+
+        setContentView(R.layout.get_name);
+
+        EditText name = (EditText) findViewById(R.id.name);
+
+
+        name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE){
+                    setName(v.getText());
+
+                }
+
+                return true;
+
+            }
+        });
+
         //these lines are for debugging.  Remove when high score list is complete.
         long temp = 0;
         Long scores = sharedPref.getLong("areaHighScore1", temp);
         Log.d(TAG, "number of high scores: "+numScores);
+    }
+
+    //when the user inputs their name for the high score list do this
+    private void setName(CharSequence text) {
+        userName = text.toString();
+
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        String setUser = "areaName" + position;
+        editor.putString(setUser, userName);
+        editor.commit();
+
+        Intent i = new Intent(this, AreaHighScores.class);
+        startActivity(i);
     }
 
 }

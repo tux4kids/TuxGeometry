@@ -2,11 +2,17 @@ package com.tux4kids.android.tuxgeometry;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +36,8 @@ public class MatchingGameActivity extends Activity {
     private int matchCount; //counts how many correct matches the user has made this round
     private int roundCount = 0; //counts how many rounds the user has completed
     private Date startDate, endDate; //when the game starts and ends
+    String userName;  //this will be set if the user gets a high score
+    int position; //the place the user achieves in the high score list
 
 
     public void onCreate(final Bundle savedInstanceState){
@@ -195,6 +203,7 @@ public class MatchingGameActivity extends Activity {
 
     }
 
+    //runs when the player has won the game
     public void winner(){
         Log.d(TAG, "The game is over!");
         endDate = new Date();
@@ -205,6 +214,130 @@ public class MatchingGameActivity extends Activity {
 
         Toast t = Toast.makeText(this, finish, Toast.LENGTH_LONG);
         t.show();
+
+
+        //Check to see if this is a high score and if it is then add it to the list
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        position = 11; //holds what place the user gets
+        int numScores = 0; //how many scores are in the high score list
+        numScores = sharedPref.getInt("numMatchingScores", numScores);
+
+        //run this if there are no scores in the high score list
+        if (numScores == 0) {
+
+            Log.d(TAG, "numScores == 0");
+            numScores++;
+            editor.putLong("matchingHighScore1", (long) finishTime);
+            position = 1;
+        }
+        else{ //this runs if there is at least one high score in the list
+
+            //these will hold the names of the keys for the high scores being compared
+            String highScore = "matchingHighScore";
+            String oldHighScore = "matchingHighScore";
+
+            Log.d(TAG, "numScores != 0  :" + numScores);
+
+            //set to true if the score is added to the high score list
+            boolean addedHighScore = false;
+
+            long temp = 0;
+
+            //a loop that iterates through all of the high scores for comparison
+            for(int i = numScores; i > 0; i--){
+
+                //set these strings to the right key values
+                highScore += i;
+                oldHighScore += (i + 1);
+
+                //the high score in the list that we will check against
+                temp = sharedPref.getLong(highScore, temp);
+
+                //if the current time is faster then add the new high score to the list
+                //and move the old high score one spot down the list
+                if(finishTime < temp) {
+                    editor.putLong(oldHighScore, temp);
+                    editor.putLong(highScore, (long) finishTime);
+
+                    position = i;
+
+                    //the first time through the loop we need to note that a
+                    //high score was added to the list
+                    if(i == numScores) {
+                        numScores++;
+                        addedHighScore = true;
+                    }
+                }
+                //do this part if the new score is not bigger than any older high scores
+                //but there is room to add it to the end of the list
+                else if (numScores < 10  && !addedHighScore) {
+                    editor.putLong(oldHighScore, (long) finishTime);
+                    numScores++;
+                    position = numScores;
+                    addedHighScore = true;
+                    break;
+                }
+                else //otherwise this isn't a high score
+                    break;
+
+                //get these keys ready to be set to new values in the next iteration of the loop
+                highScore = "matchingHighScore";
+                oldHighScore = "matchingHighScore";
+
+            }
+        }
+
+        //only 10 high scores are allowed
+        if(numScores > 10)
+            numScores = 10;
+
+
+        //update the number of high scores in the list and commit all changes
+        editor.putInt("numMatchingScores", numScores);
+        editor.commit();
+
+
+        setContentView(R.layout.get_name);
+
+        EditText name = (EditText) findViewById(R.id.name);
+
+
+        name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE){
+                    setName(v.getText());
+
+                }
+
+                return true;
+
+            }
+        });
+
+        //these lines are for debugging.  Remove when high score list is complete.
+        long temp = 0;
+        Long scores = sharedPref.getLong("areaHighScore1", temp);
+        Log.d(TAG, "number of high scores: "+numScores);
+    }
+
+    //when the user inputs their name for the high score list do this
+    private void setName(CharSequence text) {
+        userName = text.toString();
+
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        String setUser = "matchingName" + position;
+        editor.putString(setUser, userName);
+        editor.commit();
+
+        Intent i = new Intent(this, MatchingHighScores.class);
+        startActivity(i);
     }
 
 }

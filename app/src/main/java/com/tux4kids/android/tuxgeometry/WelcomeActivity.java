@@ -36,6 +36,7 @@ public class WelcomeActivity extends Activity {
         int numMatchingScores = 0;
         long temp = 0;
         String areaHighScore = "areaHighScore";
+        String matchingHighScore = "matchingHighScore";
         for(int i = 1; i <= 10; i++)
         {
             areaHighScore += i;
