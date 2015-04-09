@@ -2,6 +2,8 @@ package com.tux4kids.android.tuxgeometry;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -34,7 +36,7 @@ public class AreaGameActivity extends Activity {
 
         //run this the first round to give instructions
         if(roundCount == 0) {
-            Toast intro = Toast.makeText(this, "Drag the correct answer to the area box", Toast.LENGTH_LONG);
+            Toast intro = Toast.makeText(this, "Tap the correct answer.", Toast.LENGTH_LONG);
             intro.show();
             startDate = new Date();
         }
@@ -83,8 +85,6 @@ public class AreaGameActivity extends Activity {
                 area.setText("Area = 1/2 * height * width");
             }
 
-
-
         }
 
 
@@ -99,30 +99,29 @@ public class AreaGameActivity extends Activity {
 
         TextView[] tvArray = {answer1, answer2, answer3};
 
-        String wrongAnswer1 = new String();
-        wrongAnswer1 += areaAnswer + mRandom.nextInt(10) + 1;
-        String rightAnswer = new String();
-        rightAnswer += areaAnswer;
+        double wrongDouble1 = areaAnswer - 5 + mRandom.nextInt(10);
+        while(wrongDouble1 == areaAnswer || wrongDouble1 < 1)
+            wrongDouble1 = areaAnswer - 5 + mRandom.nextInt(10);
 
-        //this could come out to zero or negative.  fix this
-        String wrongAnswer2 = new String();
-        wrongAnswer2 += areaAnswer - mRandom.nextInt(10);
+        double wrongDouble2 = areaAnswer - 5 + mRandom.nextInt(10);
+        while(wrongDouble2 == areaAnswer || wrongDouble2 < 1 || wrongDouble2 == wrongDouble1)
+            wrongDouble2 = areaAnswer - 5 + mRandom.nextInt(10);
 
 
         for(int i = 3; i >= 1; i--){
             int rand = mRandom.nextInt(i);
             if(i==1)
-                tvArray[rand].setText(wrongAnswer1);
+                tvArray[rand].setText(String.format("%.1f", wrongDouble1));
             else if(i==2)
-                tvArray[rand].setText(rightAnswer);
+                tvArray[rand].setText(String.format( "%.1f", areaAnswer ));
             else
-                tvArray[rand].setText(wrongAnswer2);
+                tvArray[rand].setText(String.format( "%.1f", wrongDouble2 ));
 
             tvArray[rand] = tvArray[i-1];
         }
 
         //set up the private DragListener
-        final String rightTarget = rightAnswer;
+        final String rightTarget = String.format( "%.1f", areaAnswer );
         final class AnswerDragListener implements View.OnDragListener{
 
             @SuppressLint("NewApi")
@@ -214,5 +213,90 @@ public class AreaGameActivity extends Activity {
 
         Toast t = Toast.makeText(this, finish, Toast.LENGTH_LONG);
         t.show();
+
+
+        //Check to see if this is a high score and if it is then add it to the list
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        int numScores = 0;
+        numScores = sharedPref.getInt("numAreaScores", numScores);
+
+        //run this if there are no scores in the high score list
+        if (numScores == 0) {
+
+            Log.d(TAG, "numScores == 0");
+            numScores++;
+            editor.putLong("areaHighScore1", (long) finishTime);
+        }
+        else{ //this runs if there is at least one high score in the list
+
+            //these will hold the names of the keys for the high scores being compared
+            String highScore = "areaHighScore";
+            String oldHighScore = "areaHighScore";
+
+            Log.d(TAG, "numScores != 0  :" + numScores);
+
+            //set to true if the score is added to the high score list
+            boolean addedHighScore = false;
+
+            long temp = 0;
+
+            //a loop that iterates through all of the high scores for comparison
+            for(int i = numScores; i > 0; i--){
+
+                //set these strings to the right key values
+                highScore += i;
+                oldHighScore += (i + 1);
+
+                //the high score in the list that we will check against
+                temp = sharedPref.getLong(highScore, temp);
+
+                //if the current time is faster then add the new high score to the list
+                //and move the old high score one spot down the list
+                if(finishTime < temp) {
+                    editor.putLong(oldHighScore, temp);
+                    editor.putLong(highScore, (long) finishTime);
+
+                    //the first time through the loop we need to note that a
+                    //high score was added to the list
+                    if(i == numScores) {
+                        numScores++;
+                        addedHighScore = true;
+                    }
+                }
+                //do this part if the new score is not bigger than any older high scores
+                //but there is room to add it to the end of the list
+                else if (numScores < 10  && !addedHighScore) {
+                    editor.putLong(oldHighScore, (long) finishTime);
+                    numScores++;
+                    addedHighScore = true;
+                    break;
+                }
+                else //otherwise this isn't a high score
+                    break;
+
+                //get these keys ready to be set to new values in the next iteration of the loop
+                highScore = "areaHighScore";
+                oldHighScore = "areaHighScore";
+
+            }
+        }
+
+        //only 10 high scores are allowed
+        if(numScores > 10)
+            numScores = 10;
+
+
+        //update the number of high scores in the list and commit all changes
+        editor.putInt("numAreaScores", numScores);
+        editor.commit();
+
+        //these lines are for debugging.  Remove when high score list is complete.
+        long temp = 0;
+        Long scores = sharedPref.getLong("areaHighScore1", temp);
+        Log.d(TAG, "number of high scores: "+numScores);
     }
+
 }

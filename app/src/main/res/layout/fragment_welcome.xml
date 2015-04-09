@@ -9,7 +9,7 @@
     tools:context=".WelcomeActivity$PlaceholderFragment"
     android:weightSum="1"
     android:backgroundTint="#ff0aff96"
-    android:background="#ffff7d02">
+    android:background="#ff0aff96">
 
     <TextView android:text="@string/app_name"
         android:layout_width="match_parent"

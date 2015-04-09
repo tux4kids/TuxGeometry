@@ -1,7 +1,9 @@
 package com.tux4kids.android.tuxgeometry;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +27,33 @@ public class WelcomeActivity extends Activity {
         Button matchingGameButton;
         Button highScoreButton;
         Button areaGameButton;
+
+        //get the number of high scores for the Area Game and Matching Game
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        int numAreaScores = 0;
+        int numMatchingScores = 0;
+        long temp = 0;
+        String areaHighScore = "areaHighScore";
+        for(int i = 1; i <= 10; i++)
+        {
+            areaHighScore += i;
+            if(sharedPref.getLong(areaHighScore, temp) > 0)
+                numAreaScores++;
+
+
+            Log.d(TAG, "numAreaScores " + numAreaScores);
+            Log.d(TAG, areaHighScore);
+
+            areaHighScore = "areaHighScore";
+
+        }
+
+        editor.putInt("numAreaScores", numAreaScores);
+        editor.commit();
+
+        //get the number of high scores for the Matching Game
 
 
         //what happens when the matching game button is clicked in fragment_welcome.xml
