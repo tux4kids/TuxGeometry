@@ -11,6 +11,7 @@ import android.widget.Button;
 
 /**
  * Created by Jason Barker on 3/22/2015.
+ * Tux image created by Larry Ewing
  */
 public class WelcomeActivity extends Activity {
 
