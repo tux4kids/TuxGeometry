@@ -113,7 +113,6 @@ public class MatchingGameActivity extends Activity {
 
 
                     case DragEvent.ACTION_DROP:
-                        Log.d(TAG, "ACTION_DROP called");
 
                         View view = (View) event.getLocalState();
                         TextView dropTarget = (TextView) v;
@@ -132,7 +131,6 @@ public class MatchingGameActivity extends Activity {
                                 else
                                     winner();
                             }
-                            Log.d(TAG, "it's a match");
 
                         } else {
                             Log.d(TAG, "not right");
@@ -205,7 +203,6 @@ public class MatchingGameActivity extends Activity {
 
     //runs when the player has won the game
     public void winner(){
-        Log.d(TAG, "The game is over!");
         endDate = new Date();
         double finishTime = (endDate.getTime() - startDate.getTime())/1000;
         String finish = new String();
@@ -228,7 +225,6 @@ public class MatchingGameActivity extends Activity {
         //run this if there are no scores in the high score list
         if (numScores == 0) {
 
-            Log.d(TAG, "numScores == 0");
             numScores++;
             editor.putLong("matchingHighScore1", (long) finishTime);
             position = 1;
@@ -238,8 +234,6 @@ public class MatchingGameActivity extends Activity {
             //these will hold the names of the keys for the high scores being compared
             String highScore = "matchingHighScore";
             String oldHighScore = "matchingHighScore";
-
-            Log.d(TAG, "numScores != 0  :" + numScores);
 
             //set to true if the score is added to the high score list
             boolean addedHighScore = false;
@@ -318,10 +312,6 @@ public class MatchingGameActivity extends Activity {
             }
         });
 
-        //these lines are for debugging.  Remove when high score list is complete.
-        long temp = 0;
-        Long scores = sharedPref.getLong("areaHighScore1", temp);
-        Log.d(TAG, "number of high scores: "+numScores);
     }
 
     //when the user inputs their name for the high score list do this

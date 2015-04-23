@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -44,10 +43,6 @@ public class WelcomeActivity extends Activity {
             if(sharedPref.getLong(areaHighScore, temp) > 0)
                 numAreaScores++;
 
-
-            Log.d(TAG, "numAreaScores " + numAreaScores);
-            Log.d(TAG, areaHighScore);
-
             areaHighScore = "areaHighScore";
 
         }
@@ -63,9 +58,6 @@ public class WelcomeActivity extends Activity {
         matchingGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.d(TAG, "matchingGameButton clicked");
-
                 sendMessage(MatchingGameActivity.class);
 
             }
@@ -76,7 +68,6 @@ public class WelcomeActivity extends Activity {
         highScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "highScoreButton clicked");
 
                 sendMessage(HighScoreActivity.class);
 
@@ -88,7 +79,6 @@ public class WelcomeActivity extends Activity {
         areaGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "areaGameButton clicked");
 
                 sendMessage(AreaGameActivity.class);
 

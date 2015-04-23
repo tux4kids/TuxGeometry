@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.KeyEvent;
 import android.view.View;
@@ -140,8 +139,6 @@ public class AreaGameActivity extends Activity {
 
                     case DragEvent.ACTION_DROP:
                     {
-                        //do stuff here
-                        Log.d(TAG, "ACTION_DROP");
 
                         View view = (View) event.getLocalState();
                         TextView dropTarget = (TextView) v;
@@ -211,7 +208,6 @@ public class AreaGameActivity extends Activity {
 
     //runs when the player has won the game
     public void winner(){
-        Log.d(TAG, "The game is over!");
         endDate = new Date();
         double finishTime = (endDate.getTime() - startDate.getTime())/1000;
         String finish = new String();
@@ -234,7 +230,6 @@ public class AreaGameActivity extends Activity {
         //run this if there are no scores in the high score list
         if (numScores == 0) {
 
-            Log.d(TAG, "numScores == 0");
             numScores++;
             editor.putLong("areaHighScore1", (long) finishTime);
             position = 1;
@@ -244,8 +239,6 @@ public class AreaGameActivity extends Activity {
             //these will hold the names of the keys for the high scores being compared
             String highScore = "areaHighScore";
             String oldHighScore = "areaHighScore";
-
-            Log.d(TAG, "numScores != 0  :" + numScores);
 
             //set to true if the score is added to the high score list
             boolean addedHighScore = false;
@@ -324,10 +317,7 @@ public class AreaGameActivity extends Activity {
             }
         });
 
-        //these lines are for debugging.  Remove when high score list is complete.
-        long temp = 0;
-        Long scores = sharedPref.getLong("areaHighScore1", temp);
-        Log.d(TAG, "number of high scores: "+numScores);
+
     }
 
     //when the user inputs their name for the high score list do this
