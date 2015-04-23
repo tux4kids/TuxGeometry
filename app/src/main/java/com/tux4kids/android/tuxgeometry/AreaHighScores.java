@@ -44,61 +44,80 @@ public class AreaHighScores extends Activity {
         if (numScores >= 1) {
             tempScore = sharedPref.getLong("areaHighScore1", tempScore);
             tempName = sharedPref.getString("areaName1", tempName);
-            highScore1.setText(tempName + " " + tempScore);
+            if(tempName.equals(""))
+                tempName = "Anonymous";
+            highScore1.setText("1. " + tempName + " " + tempScore + " seconds!");
         }
         if (numScores >= 2) {
             tempName = "";
             tempScore = sharedPref.getLong("areaHighScore2", tempScore);
             tempName = sharedPref.getString("areaName2", tempName);
-            highScore2.setText(tempName + " " + tempScore);
+            if(tempName.equals(""))
+                tempName = "Anonymous";
+            highScore2.setText("2. " + tempName + " " + tempScore + " seconds!");
         }
         if (numScores >= 3) {
             tempName = "";
             tempScore = sharedPref.getLong("areaHighScore3", tempScore);
             tempName = sharedPref.getString("areaName3", tempName);
-            highScore3.setText(tempName + " " + tempScore);
+            if(tempName.equals(""))
+                tempName = "Anonymous";
+            highScore3.setText("3. " + tempName + " " + tempScore + " seconds!");
         }
         if (numScores >= 4) {
             tempName = "";
             tempScore = sharedPref.getLong("areaHighScore4", tempScore);
             tempName = sharedPref.getString("areaName4", tempName);
-            highScore4.setText(tempName + " " + tempScore);
+            if(tempName.equals(""))
+                tempName = "Anonymous";
+            highScore4.setText("4. " + tempName + " " + tempScore + " seconds!");
         }
         if (numScores >= 5) {
             tempName = "";
             tempScore = sharedPref.getLong("areaHighScore5", tempScore);
             tempName = sharedPref.getString("areaName5", tempName);
-            highScore5.setText(tempName + " " + tempScore);
+            if(tempName.equals(""))
+                tempName = "Anonymous";
+            highScore5.setText("5. " + tempName + " " + tempScore + " seconds!");
         }
         if (numScores >= 6) {
             tempName = "";
             tempScore = sharedPref.getLong("areaHighScore6", tempScore);
             tempName = sharedPref.getString("areaName6", tempName);
-            highScore6.setText(tempName + " " + tempScore);
+            if(tempName.equals(""))
+                tempName = "Anonymous";
+            highScore6.setText("6. " + tempName + " " + tempScore + " seconds!");
         }
         if (numScores >= 7) {
             tempName = "";
             tempScore = sharedPref.getLong("areaHighScore7", tempScore);
             tempName = sharedPref.getString("areaName7", tempName);
-            highScore7.setText(tempName + " " + tempScore);
-        }
+            if(tempName.equals(""))
+                tempName = "Anonymous";
+            highScore7.setText("7. " + tempName + " " + tempScore + " seconds!");        }
         if (numScores >= 8) {
             tempName = "";
             tempScore = sharedPref.getLong("areaHighScore8", tempScore);
             tempName = sharedPref.getString("areaName8", tempName);
-            highScore8.setText(tempName + " " + tempScore);
+            if(tempName.equals(""))
+                tempName = "Anonymous";
+            highScore8.setText("8. " + tempName + " " + tempScore + " seconds!");
         }
         if (numScores >= 9) {
             tempName = "";
             tempScore = sharedPref.getLong("areaHighScore9", tempScore);
             tempName = sharedPref.getString("areaName9", tempName);
-            highScore9.setText(tempName + " " + tempScore);
+            if(tempName.equals(""))
+                tempName = "Anonymous";
+            highScore9.setText("9. " + tempName + " " + tempScore + " seconds!");
         }
         if (numScores >= 10) {
             tempName = "";
             tempScore = sharedPref.getLong("areaHighScore10", tempScore);
             tempName = sharedPref.getString("areaName10", tempName);
-            highScore10.setText(tempName + " " + tempScore);
+            if(tempName.equals(""))
+                tempName = "Anonymous";
+            highScore10.setText("10. " + tempName + " " + tempScore + " seconds!");
         }
     }
 }

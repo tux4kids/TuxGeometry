@@ -19,69 +19,79 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text=""
-                android:id="@+id/highScore1" />
+                android:id="@+id/highScore1"
+                android:textColor="#ff0000ff" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text=""
-                android:id="@+id/highScore2" />
+                android:id="@+id/highScore2"
+                android:textColor="#ff0000ff" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text=""
-                android:id="@+id/highScore3" />
+                android:id="@+id/highScore3"
+                android:textColor="#ff0000ff" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text=""
-                android:id="@+id/highScore4" />
+                android:id="@+id/highScore4"
+                android:textColor="#ff0000ff" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text=""
-                android:id="@+id/highScore5" />
+                android:id="@+id/highScore5"
+                android:textColor="#ff0000ff" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text=""
-                android:id="@+id/highScore6" />
+                android:id="@+id/highScore6"
+                android:textColor="#ff0000ff" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text=""
-                android:id="@+id/highScore7" />
+                android:id="@+id/highScore7"
+                android:textColor="#ff0000ff" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text=""
-                android:id="@+id/highScore8" />
+                android:id="@+id/highScore8"
+                android:textColor="#ff0000ff" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text=""
-                android:id="@+id/highScore9" />
+                android:id="@+id/highScore9"
+                android:textColor="#ff0000ff" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text=""
-                android:id="@+id/highScore10" />
+                android:id="@+id/highScore10"
+                android:textColor="#ff0000ff" />
         </LinearLayout>
     </ScrollView>
 
