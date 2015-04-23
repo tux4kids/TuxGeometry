@@ -186,7 +186,7 @@ public class MatchingGameActivity extends Activity {
                 image.setImageResource(R.drawable.parallelogram);
                 return "PARALLELOGRAM";
             case 5:
-                image.setImageResource(R.drawable.star);
+                image.setImageResource(R.drawable.star2);
                 return "STAR";
             case 6:
                 image.setImageResource(R.drawable.triangle);
