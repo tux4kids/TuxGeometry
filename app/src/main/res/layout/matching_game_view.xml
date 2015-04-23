@@ -3,8 +3,8 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/linear_layout"
     android:orientation="horizontal"
-    android:background="#ff0aff96"
-    android:backgroundTint="#ff29efff">
+    android:background="#ffc1f6ff"
+    android:backgroundTint="#ffc1f6ff">
 
     <ImageView
         android:layout_width="wrap_content"
