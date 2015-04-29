@@ -2,8 +2,11 @@ package com.tux4kids.android.tuxgeometry;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -119,6 +122,30 @@ public class MatchingHighScores extends Activity {
                 tempName = "Anonymous";
             highScore10.setText("10. " + tempName + " " + tempScore + " seconds!");
         }
+
+        //set up the button for launching a new game
+        Button playAgain = (Button) findViewById(R.id.playagain);
+
+        playAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchActivity(MatchingGameActivity.class);
+            }
+        });
+
+        //set up the button for returning to the welcome screen
+        Button returnHome = (Button) findViewById(R.id.welcomescreen);
+
+        returnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchActivity(WelcomeActivity.class);
+            }
+        });
+    }
+
+    private void launchActivity(Class classToLaunch) {
+        startActivity(new Intent(this, classToLaunch));
     }
 }
 

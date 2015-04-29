@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/matchingImageButton"
-        android:src="@drawable/mediumtux"
+        android:src="@drawable/reversemediumtux"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -36,7 +36,10 @@
         android:background="@android:color/transparent"
         android:layout_centerVertical="true"
         android:layout_alignRight="@+id/areaImageButton"
-        android:layout_alignEnd="@+id/areaImageButton" />
+        android:layout_alignEnd="@+id/areaImageButton"
+        android:textColor="#ff2ce9ff"
+        android:textStyle="bold|italic"
+        android:typeface="normal" />
 
     <Button
         android:layout_width="wrap_content"
@@ -49,5 +52,7 @@
         android:layout_marginEnd="98dp"
         android:layout_centerVertical="true"
         android:layout_alignRight="@+id/matchingImageButton"
-        android:layout_alignEnd="@+id/matchingImageButton" />
+        android:layout_alignEnd="@+id/matchingImageButton"
+        android:textColor="#ff2ce9ff"
+        android:textStyle="bold|italic" />
 </RelativeLayout>
