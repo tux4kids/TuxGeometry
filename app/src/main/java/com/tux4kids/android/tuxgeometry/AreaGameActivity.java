@@ -214,6 +214,9 @@ public class AreaGameActivity extends Activity {
         finish += finishTime;
         finish = "You win! It took you " + finish + " seconds";
 
+        //set to true if the score is added to the high score list
+        boolean addedHighScore = false;
+
         Toast t = Toast.makeText(this, finish, Toast.LENGTH_LONG);
         t.show();
 
@@ -233,6 +236,7 @@ public class AreaGameActivity extends Activity {
             numScores++;
             editor.putLong("areaHighScore1", (long) finishTime);
             position = 1;
+            addedHighScore = true;
         }
         else{ //this runs if there is at least one high score in the list
 
@@ -240,8 +244,6 @@ public class AreaGameActivity extends Activity {
             String highScore = "areaHighScore";
             String oldHighScore = "areaHighScore";
 
-            //set to true if the score is added to the high score list
-            boolean addedHighScore = false;
 
             long temp = 0;
 
@@ -262,12 +264,13 @@ public class AreaGameActivity extends Activity {
                     editor.putLong(highScore, (long) finishTime);
 
                     position = i;
+                    addedHighScore = true;
+
 
                     //the first time through the loop we need to note that a
                     //high score was added to the list
                     if(i == numScores) {
                         numScores++;
-                        addedHighScore = true;
                     }
                 }
                 //do this part if the new score is not bigger than any older high scores
@@ -303,19 +306,22 @@ public class AreaGameActivity extends Activity {
 
         EditText name = (EditText) findViewById(R.id.name);
 
+        if(addedHighScore) {
+            name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        setName(v.getText());
 
-        name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE){
-                    setName(v.getText());
+                    }
+
+                    return true;
 
                 }
-
-                return true;
-
-            }
-        });
+            });
+        }
+        else
+            startActivity(new Intent(this, AreaHighScores.class));
 
 
     }

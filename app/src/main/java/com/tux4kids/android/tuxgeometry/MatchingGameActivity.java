@@ -209,6 +209,9 @@ public class MatchingGameActivity extends Activity {
         finish += finishTime;
         finish = "You win! It took you " + finish + " seconds";
 
+        //set to true if the score is added to the high score list
+        boolean addedHighScore = false;
+
         Toast t = Toast.makeText(this, finish, Toast.LENGTH_LONG);
         t.show();
 
@@ -228,6 +231,7 @@ public class MatchingGameActivity extends Activity {
             numScores++;
             editor.putLong("matchingHighScore1", (long) finishTime);
             position = 1;
+            addedHighScore = true;
         }
         else{ //this runs if there is at least one high score in the list
 
@@ -235,8 +239,6 @@ public class MatchingGameActivity extends Activity {
             String highScore = "matchingHighScore";
             String oldHighScore = "matchingHighScore";
 
-            //set to true if the score is added to the high score list
-            boolean addedHighScore = false;
 
             long temp = 0;
 
@@ -257,12 +259,12 @@ public class MatchingGameActivity extends Activity {
                     editor.putLong(highScore, (long) finishTime);
 
                     position = i;
+                    addedHighScore = true;
 
                     //the first time through the loop we need to note that a
                     //high score was added to the list
                     if(i == numScores) {
                         numScores++;
-                        addedHighScore = true;
                     }
                 }
                 //do this part if the new score is not bigger than any older high scores
@@ -293,24 +295,28 @@ public class MatchingGameActivity extends Activity {
         editor.putInt("numMatchingScores", numScores);
         editor.commit();
 
+        //if a new high score was added then get the users name and add it to the list
+        if(addedHighScore) {
 
-        setContentView(R.layout.get_name);
+            setContentView(R.layout.get_name);
 
-        EditText name = (EditText) findViewById(R.id.name);
+            EditText name = (EditText) findViewById(R.id.name);
 
+            name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        setName(v.getText());
 
-        name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE){
-                    setName(v.getText());
+                    }
+
+                    return true;
 
                 }
-
-                return true;
-
-            }
-        });
+            });
+        }
+        else
+            startActivity(new Intent(this, MatchingHighScores.class));
 
     }
 
