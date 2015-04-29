@@ -151,11 +151,8 @@ public class MatchingGameActivity extends Activity {
 
         //add the drag listeners
         answer1.setOnDragListener(new AnswerDragListener());
-        tv1.setOnDragListener(new AnswerDragListener());
         answer2.setOnDragListener(new AnswerDragListener());
-        tv2.setOnDragListener(new AnswerDragListener());
         answer3.setOnDragListener(new AnswerDragListener());
-        tv3.setOnDragListener(new AnswerDragListener());
 
     }
 
