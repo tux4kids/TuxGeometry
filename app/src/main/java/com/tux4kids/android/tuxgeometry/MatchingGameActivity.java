@@ -144,12 +144,12 @@ public class MatchingGameActivity extends Activity {
             }
         }
 
-        //add the touch listeners
+        //add the touch listeners to the shape names
         tv1.setOnTouchListener(new ShapeTextTouchListener());
         tv2.setOnTouchListener(new ShapeTextTouchListener());
         tv3.setOnTouchListener(new ShapeTextTouchListener());
 
-        //add the drag listeners
+        //add the drag listeners to the answer TextViews
         answer1.setOnDragListener(new AnswerDragListener());
         answer2.setOnDragListener(new AnswerDragListener());
         answer3.setOnDragListener(new AnswerDragListener());
