@@ -1,63 +1,79 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingLeft="@dimen/abc_control_padding_material"
     android:paddingRight="@dimen/abc_control_padding_material"
     android:paddingTop="@dimen/abc_control_padding_material"
     android:paddingBottom="@dimen/abc_control_padding_material"
     android:orientation="horizontal"
-    tools:context=".WelcomeActivity$PlaceholderFragment"
     android:weightSum="1"
-    android:backgroundTint="#ffc1f6ff"
-    android:background="#ffc1f6ff">
+    android:background="@color/colorPrimary">
 
     <TextView android:text="@string/app_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/welcome_title"
-        android:elegantTextHeight="true"
-        android:textColor="#ffff7d02"
-        android:textSize="64sp"
-        android:gravity="center" />
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:id="@+id/welcome_title"
+              android:elegantTextHeight="true"
+              android:textColor="@color/colorAccent"
+              android:textSize="64sp"
+              android:gravity="center"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintRight_toRightOf="parent"
+              app:layout_constraintLeft_toLeftOf="parent"
+        />
 
     <Button
+        android:id="@+id/matching_button"
+        style="@style/ButtonStyle"
+        android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/matching_start_button"
-        android:id="@+id/matching_button"
-        android:layout_below="@id/welcome_title"
-        android:layout_centerHorizontal="true" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_title"
+        />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/area_start_button"
         android:id="@+id/area_button"
-        android:layout_below="@+id/matching_button"
-        android:layout_centerHorizontal="true" />
+        style="@style/ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/area_start_button"
+        app:layout_constraintLeft_toLeftOf="@+id/matching_button"
+        app:layout_constraintRight_toRightOf="@+id/matching_button"
+        app:layout_constraintTop_toBottomOf="@+id/matching_button"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/high_score_button"
         android:id="@+id/high_score_button"
-        android:layout_below="@+id/area_button"
-        android:layout_centerHorizontal="true" />
+        style="@style/ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/high_score_button"
+        app:layout_constraintLeft_toLeftOf="@+id/matching_button"
+        app:layout_constraintRight_toRightOf="@+id/matching_button"
+        app:layout_constraintTop_toBottomOf="@+id/area_button"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/reversesmalltux" />
+        android:src="@drawable/reversesmalltux"
+        android:contentDescription="@string/tux_the_penguin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView2"
         android:src="@drawable/smalltux"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
+        android:contentDescription="@string/tux_the_penguin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

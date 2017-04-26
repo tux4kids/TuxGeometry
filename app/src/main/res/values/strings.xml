@@ -9,5 +9,9 @@
     <string name="drag_drop">Click on the image to drag and drop</string>
     <string name="preference_file_key">com.tux4kids.highScores.txt</string>
     <string name="area_high_score_button">Area Game</string>
+    <string name="height">Height</string>
+    <string name="width">Width</string>
+    <string name="shape">shape</string>
+    <string name="tux_the_penguin">Tux the Penguin!</string>
 
 </resources>

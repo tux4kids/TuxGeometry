@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/tux">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:background="@drawable/tux">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,80 +20,80 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
+                tools:text="High Score 1"
                 android:id="@+id/highScore1"
-                android:textColor="#ff0000ff" />
+                android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
+                tools:text="High Score 2"
                 android:id="@+id/highScore2"
-                android:textColor="#ff0000ff" />
+                android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
+                tools:text="High Score 3"
                 android:id="@+id/highScore3"
-                android:textColor="#ff0000ff" />
+                android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
+                tools:text="High Score 4"
                 android:id="@+id/highScore4"
-                android:textColor="#ff0000ff" />
+                android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
+                tools:text="High Score 5"
                 android:id="@+id/highScore5"
-                android:textColor="#ff0000ff" />
+                android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
+                tools:text="High Score 6"
                 android:id="@+id/highScore6"
-                android:textColor="#ff0000ff" />
+                android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
+                tools:text="High Score 7"
                 android:id="@+id/highScore7"
-                android:textColor="#ff0000ff" />
+                android:textColor="@color/colorPrimaryDark"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
+                tools:text="High Score 8"
                 android:id="@+id/highScore8"
-                android:textColor="#ff0000ff" />
+                android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
+                tools:text="High Score 9"
                 android:id="@+id/highScore9"
-                android:textColor="#ff0000ff" />
+                android:textColor="@color/colorPrimaryDark"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
+                tools:text="High Score 10"
                 android:id="@+id/highScore10"
-                android:textColor="#ff0000ff" />
+                android:textColor="@color/colorPrimaryDark"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -102,6 +104,8 @@
                     android:layout_height="wrap_content"
                     android:text="Play Again"
                     android:id="@+id/playagain"
+                    style="@style/ButtonStyle"
+                    android:layout_margin="4dp"
                     android:layout_weight=".5" />
 
                 <Button
@@ -109,6 +113,8 @@
                     android:layout_height="wrap_content"
                     android:text="Main Menu"
                     android:id="@+id/welcomescreen"
+                    android:layout_margin="4dp"
+                    style="@style/ButtonStyle"
                     android:layout_weight=".5" />
             </LinearLayout>
         </LinearLayout>
